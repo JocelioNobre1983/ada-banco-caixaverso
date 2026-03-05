@@ -1,6 +1,7 @@
 package com.ada.caixaverso.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Transacoes {
     private String agencia;
@@ -46,6 +47,21 @@ public class Transacoes {
     public String getOperador() { return operador; }
 
     public LocalDateTime getDatahora() { return datahora; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Transacoes that = (Transacoes) o;
+        return Double.compare(valor, that.valor) == 0
+                && Objects.equals(operacao, that.operacao)
+                && Objects.equals(operador, that.operador)
+                && Objects.equals(datahora, that.datahora);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operacao, valor, operador, datahora);
+    }
 
     @Override
     public String toString(){
